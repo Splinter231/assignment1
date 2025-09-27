@@ -1,0 +1,4 @@
+algorithm,n,trial,time_ns,max_depth,comparisons,swaps,allocations,seed,timestamp
+arraysort,1000,0,207200,0,0,0,0,42,2025-09-27T06:54:41.304754600Z
+arraysort,1000,1,217800,0,0,0,0,43,2025-09-27T06:54:41.317752400Z
+arraysort,1000,2,205700,0,0,0,0,44,2025-09-27T06:54:41.317752400Z
