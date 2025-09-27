@@ -5,12 +5,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class Metrics {
-    private final AtomicLong comparisons = new AtomicLong(0);
-    private final AtomicLong swaps = new AtomicLong(0);
-    private final AtomicLong allocations = new AtomicLong(0);
+    private static AtomicLong comparisons = new AtomicLong(0);
+    private static AtomicLong swaps = new AtomicLong(0);
+    private static AtomicLong allocations = new AtomicLong(0);
 
-    private final ThreadLocal<Integer> currentDepth = ThreadLocal.withInitial(() -> 0);
-    private final AtomicInteger maxDepth = new AtomicInteger(0);
+    private static ThreadLocal<Integer> currentDepth = ThreadLocal.withInitial(() -> 0);
+    private static AtomicInteger maxDepth = new AtomicInteger(0);
 
     public void enter() {
         int d = currentDepth.get() + 1;
@@ -37,7 +37,7 @@ public final class Metrics {
     public long getAllocations() { return allocations.get(); }
     public int getMaxDepth() { return maxDepth.get(); }
 
-    public void reset() {
+    public static void reset() {
         comparisons.set(0);
         swaps.set(0);
         allocations.set(0);

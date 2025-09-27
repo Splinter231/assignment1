@@ -7,6 +7,7 @@ import org.example.sorts.QuickSort;
 import org.example.select.DeterministicSelect;
 import org.example.closest.ClosestPair;
 
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class Main {
@@ -46,15 +47,21 @@ public class Main {
             }
         }
 
-        CSVWriter.write("bench-results.csv",
-                algo, n,
-                metrics.getComparisons(),
-                metrics.getAllocations(),
-                metrics.getMaxDepth(),
-                System.currentTimeMillis() // <-- тут пока просто заглушка времени
-        );
+        try (CSVWriter writer = new CSVWriter(Paths.get("bench-results.csv"))) {
+            writer.writeHeader();
+            writer.writeRow(
+                    algo, n, 1,                      // algo, n, trial
+                    System.nanoTime(),               // timeNs
+                    metrics.getMaxDepth(),           // max depth
+                    metrics.getComparisons(),        // comparisons
+                    metrics.getSwaps(),              // swaps
+                    metrics.getAllocations(),        // allocations
+                    0L                               // seed
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Done. Results written to bench-results.csv");
     }
-
 }
