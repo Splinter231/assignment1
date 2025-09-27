@@ -49,13 +49,13 @@ public class Main {
         try (CSVWriter writer = new CSVWriter(Paths.get("bench-results.csv"))) {
             writer.writeHeader();
             writer.writeRow(
-                    algo, n, 1,                      // algo, n, trial
-                    System.nanoTime(),               // timeNs
-                    metrics.getMaxDepth(),           // max depth
-                    metrics.getComparisons(),        // comparisons
-                    metrics.getSwaps(),              // swaps
-                    metrics.getAllocations(),        // allocations
-                    0L                               // seed
+                    algo, n, 1,
+                    System.nanoTime(),
+                    metrics.getMaxDepth(),
+                    metrics.getComparisons(),
+                    metrics.getSwaps(),
+                    metrics.getAllocations(),
+                    0L
             );
         } catch (Exception e) {
             e.printStackTrace();

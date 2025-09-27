@@ -43,7 +43,7 @@ public class ClosestPair {
         double dRight = closestRecursive(Arrays.copyOfRange(points, mid, n));
         double d = Math.min(dLeft, dRight);
 
-        // Полоса вокруг середины
+
         Point[] strip = Arrays.stream(points)
                 .filter(p -> Math.abs(p.x - midPoint.x) < d)
                 .sorted(Comparator.comparingDouble(p -> p.y))
