@@ -1,0 +1,1 @@
+Assignment 1 — implementations of divide-and-conquer algorithms
