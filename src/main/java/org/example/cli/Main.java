@@ -24,7 +24,6 @@ public class Main {
         Random random = new Random();
         int[] arr = random.ints(n, 0, 1_000_000).toArray();
 
-        Metrics.reset();
         Metrics metrics = new Metrics();
 
         switch (algo.toLowerCase()) {

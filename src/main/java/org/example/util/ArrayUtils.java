@@ -1,6 +1,7 @@
 package org.example.util;
 
 import org.example.metrics.Metrics;
+
 import java.util.Random;
 
 public final class ArrayUtils {
@@ -8,13 +9,15 @@ public final class ArrayUtils {
 
     private ArrayUtils() {}
 
-
     public static void swap(int[] a, int i, int j, Metrics metrics) {
         if (i == j) return;
         int tmp = a[i];
         a[i] = a[j];
         a[j] = tmp;
-        if (metrics != null) metrics.incSwaps();
+
+        if (metrics != null) {
+            metrics.incSwaps();   // <--- только один раз
+        }
     }
 
 
@@ -27,9 +30,7 @@ public final class ArrayUtils {
         }
     }
 
-
     public static int partition(int[] a, int lo, int hi, int pivotIndex, Metrics metrics) {
-
         swap(a, pivotIndex, hi, metrics);
         int pivot = a[hi];
         int store = lo;
@@ -43,7 +44,6 @@ public final class ArrayUtils {
         swap(a, store, hi, metrics);
         return store;
     }
-
 
     public static boolean isSorted(int[] a) {
         for (int i = 1; i < a.length; i++) {
