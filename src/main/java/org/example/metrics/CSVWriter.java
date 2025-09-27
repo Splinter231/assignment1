@@ -41,6 +41,24 @@ public final class CSVWriter implements Closeable {
         bw.newLine();
         bw.flush();
     }
+    public static void write(String filePath,
+                             String algorithm,
+                             int n,
+                             long comparisons,
+                             long allocations,
+                             int maxDepth,
+                             long timeMs) {
+        Path p = Paths.get(filePath);
+        long seed = System.currentTimeMillis();
+        try (CSVWriter writer = new CSVWriter(p)) {
+            writer.writeHeader();
+            writer.writeRow(algorithm, n, 1, timeMs * 1_000_000, maxDepth, comparisons, 0, allocations, seed);
+        } catch (IOException e) {
+            System.err.println("Failed to write CSV: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void close() throws IOException {
         bw.close();

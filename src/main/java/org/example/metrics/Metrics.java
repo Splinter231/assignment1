@@ -1,6 +1,5 @@
 package org.example.metrics;
 
-
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -11,6 +10,8 @@ public final class Metrics {
 
     private final ThreadLocal<Integer> currentDepth = ThreadLocal.withInitial(() -> 0);
     private final AtomicInteger maxDepth = new AtomicInteger(0);
+
+    public Metrics() { }
 
     public void enter() {
         int d = currentDepth.get() + 1;
@@ -44,6 +45,7 @@ public final class Metrics {
         currentDepth.set(0);
         maxDepth.set(0);
     }
+
     @Override
     public String toString() {
         return "Metrics{" +

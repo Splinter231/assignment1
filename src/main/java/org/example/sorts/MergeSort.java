@@ -12,10 +12,15 @@ public final class MergeSort {
         Objects.requireNonNull(a);
         if (a.length <= 1) return;
 
+        if (metrics != null) {
+            metrics.reset();
+            metrics.addAllocations(1);
+        }
+
         int[] aux = new int[a.length];
-        if (metrics != null) metrics.addAllocations(1);
         mergeSortRec(a, aux, 0, a.length, metrics);
     }
+
 
     private static void mergeSortRec(int[] a, int[] aux, int lo, int hi, Metrics metrics) {
         if (metrics != null) metrics.enter();
@@ -43,12 +48,8 @@ public final class MergeSort {
                     aux[k++] = a[j++];
                 }
             }
-            while (i < mid) {
-                aux[k++] = a[i++];
-            }
-            while (j < hi) {
-                aux[k++] = a[j++];
-            }
+            while (i < mid) aux[k++] = a[i++];
+            while (j < hi) aux[k++] = a[j++];
             System.arraycopy(aux, lo, a, lo, len);
         } finally {
             if (metrics != null) metrics.exit();
@@ -62,7 +63,7 @@ public final class MergeSort {
             while (j >= lo) {
                 if (metrics != null) metrics.incComparisons();
                 if (a[j] > key) {
-                    a[j + 1] = a[j]; // shift
+                    a[j + 1] = a[j];
                     if (metrics != null) metrics.incSwaps();
                     j--;
                 } else {
