@@ -3,6 +3,7 @@ package org.example.metrics;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class MetricsTest {
     @Test
     void depthTracking() {
