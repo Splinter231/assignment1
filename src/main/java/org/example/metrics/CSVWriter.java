@@ -40,7 +40,6 @@ public final class CSVWriter implements Closeable {
         bw.newLine();
         bw.flush();
     }
-
     @Override
     public void close() throws IOException {
         bw.close();

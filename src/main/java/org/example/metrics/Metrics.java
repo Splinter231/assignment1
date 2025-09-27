@@ -43,7 +43,6 @@ public final class Metrics {
         currentDepth.set(0);
         maxDepth.set(0);
     }
-
     @Override
     public String toString() {
         return "Metrics{" +

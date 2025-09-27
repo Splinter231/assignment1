@@ -1,5 +1,4 @@
 package org.example.bench;
-
 import java.io.IOException;
 import java.nio.file.Paths;
 

@@ -2,7 +2,6 @@ package org.example.bench;
 
 import org.example.metrics.CSVWriter;
 import org.example.metrics.Metrics;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Random;
