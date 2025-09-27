@@ -3,6 +3,8 @@ package org.example.sorts;
 import org.example.metrics.Metrics;
 import java.util.Objects;
 import java.util.Random;
+import org.example.util.ArrayUtils;
+
 
 public final class QuickSort {
     private static final Random rnd = new Random();
@@ -21,7 +23,7 @@ public final class QuickSort {
         try {
 
             int pivotIndex = lo + rnd.nextInt(hi - lo + 1);
-            swap(a, lo, pivotIndex, metrics);
+            ArrayUtils.swap(a, lo, pivotIndex, metrics);
 
             int pivot = a[lo];
             int i = lo + 1, j = hi;

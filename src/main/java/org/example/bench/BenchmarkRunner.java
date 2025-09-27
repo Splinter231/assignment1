@@ -17,7 +17,6 @@ public class BenchmarkRunner {
             writer.writeHeader();
             Random rnd = new Random(seed);
 
-            // warm-up
             int[] warm = genRandomArray(n, rnd.nextLong());
             sortFunc.accept(warm, new Metrics());
 
