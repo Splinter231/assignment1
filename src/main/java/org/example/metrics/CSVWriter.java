@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.time.Instant;
 
-
 public final class CSVWriter implements Closeable {
     private final BufferedWriter bw;
     private final Path path;
@@ -16,7 +15,9 @@ public final class CSVWriter implements Closeable {
         this.path = path;
         Path parent = path.getParent() == null ? Paths.get(".") : path.getParent();
         Files.createDirectories(parent);
-        this.bw = Files.newBufferedWriter(path, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        this.bw = Files.newBufferedWriter(path,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.APPEND);
     }
 
     public synchronized void writeHeader() throws IOException {
@@ -30,9 +31,14 @@ public final class CSVWriter implements Closeable {
         }
     }
 
-    public synchronized void writeRow(String algorithm, int n, int trial,
-                                      long timeNs, int maxDepth,
-                                      long comparisons, long swaps, long allocations,
+    public synchronized void writeRow(String algorithm,
+                                      int n,
+                                      int trial,
+                                      long timeNs,
+                                      int maxDepth,
+                                      long comparisons,
+                                      long swaps,
+                                      long allocations,
                                       long seed) throws IOException {
         String ts = Instant.now().toString();
         String row = String.format("%s,%d,%d,%d,%d,%d,%d,%d,%d,%s",
@@ -41,18 +47,20 @@ public final class CSVWriter implements Closeable {
         bw.newLine();
         bw.flush();
     }
+
     public static void write(String filePath,
                              String algorithm,
                              int n,
                              long comparisons,
+                             long swaps,
                              long allocations,
                              int maxDepth,
-                             long timeMs) {
+                             long timeNs) {
         Path p = Paths.get(filePath);
         long seed = System.currentTimeMillis();
         try (CSVWriter writer = new CSVWriter(p)) {
             writer.writeHeader();
-            writer.writeRow(algorithm, n, 1, timeMs * 1_000_000, maxDepth, comparisons, 0, allocations, seed);
+            writer.writeRow(algorithm, n, 1, timeNs, maxDepth, comparisons, swaps, allocations, seed);
         } catch (IOException e) {
             System.err.println("Failed to write CSV: " + e.getMessage());
             e.printStackTrace();
